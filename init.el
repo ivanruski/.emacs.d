@@ -4,6 +4,9 @@
 ;; Hide the menu bar
 (menu-bar-mode -1)
 
+;; turn on highlight matching brackets when cursor is on one
+(show-paren-mode 1)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
