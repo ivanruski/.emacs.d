@@ -28,4 +28,5 @@
              '("melpa" . "https://melpa.org/packages/")
              t)
 
+;; set path to the racket binary in order to be abel to use racket-mode
 (setq racket-program "./../../usr/bin/racket")
