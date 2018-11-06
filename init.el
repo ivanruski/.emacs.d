@@ -30,3 +30,6 @@
 
 ;; set path to the racket binary in order to be abel to use racket-mode
 (setq racket-program "./../../usr/bin/racket")
+
+;; Change hotkey for undo
+(global-set-key "\C-z" 'undo)
