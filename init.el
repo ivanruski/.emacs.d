@@ -33,3 +33,6 @@
 
 ;; Change hotkey for undo
 (global-set-key "\C-z" 'undo)
+
+;; Set indentaion to 4 for c/cpp files
+(setq-default c-basic-offset 4)
