@@ -4,6 +4,12 @@
 ;; Hide the menu bar
 (menu-bar-mode -1)
 
+;; Hide the scroll bar
+(scroll-bar-mode -1)
+
+;; Change the cursor to _
+(set-default 'cursor-type 'hbar)
+
 ;; turn on highlight matching brackets when cursor is on one
 (show-paren-mode 1)
 
