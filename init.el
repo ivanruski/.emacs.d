@@ -38,7 +38,11 @@
 (setq racket-program "./../../usr/bin/racket")
 
 ;; Change hotkey for undo
-(global-set-key "\C-z" 'undo)
+(global-set-key [(control z)] 'undo)
+
+;; Overriding the default (control-b) for showing and navigating
+;; to all available opened buffers
+(global-set-key [(control tab)] 'switch-to-buffer)
 
 ;; Set indentaion to 4 for c/cpp files
 (setq-default c-basic-offset 4)
