@@ -1,13 +1,11 @@
 ;; add melpa packages
 ;; no sure what exacly the function
 (require 'package)
+
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/*"))
-(package-initialize)
 
-;; use separete file for customize
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+(package-initialize)
 
 ;; Skip the startup screen
 (setq-default inhibit-startup-screen t)
