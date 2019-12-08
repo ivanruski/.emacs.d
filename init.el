@@ -1,3 +1,15 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+;; Skip the startup screen
+(setq-default inhibit-startup-screen t)
+
+;;Load default theme
+(load-theme 'zenburn t)
+
 ;; Hide the toolbar
 (tool-bar-mode -1)
 
@@ -7,42 +19,36 @@
 ;; Hide the scroll bar
 (scroll-bar-mode -1)
 
-;; Change the cursor to _
-(set-default 'cursor-type 'hbar)
+;; Change the cursor type
+(set-default 'cursor-type 'box)
 
 ;; turn on highlight matching brackets when cursor is on one
 (show-paren-mode 1)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(custom-enabled-themes (quote (wombat)))
- '(inhibit-startup-screen t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
-             t)
-
-;; set path to the racket binary in order to be abel to use racket-mode
-(setq racket-program "./../../usr/bin/racket")
-
+;; Key re-maps
 ;; Change hotkey for undo
 (global-set-key [(control z)] 'undo)
+;; Change M-x to C-x C-m
+(global-set-key "\C-x\C-m" 'execute-extended-command)
 
 ;; Overriding the default (control-b) for showing and navigating
 ;; to all available opened buffers
 (global-set-key [(control tab)] 'switch-to-buffer)
 
-;; Set indentaion to 4 for c/cpp files
-(setq-default c-basic-offset 4)
+;; Set emacs backup directory
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+  backup-by-copying t    ; Don't delink hardlinks
+  version-control t      ; Use version numbers on backups
+  delete-old-versions t  ; Automatically delete excess backups
+  kept-new-versions 5   ; how many of the newest versions to keep
+  kept-old-versions 5    ; and how many of the old
+  )
+
+;; use spaces instead of tab characters and make the default tab width to 4 chars 
+(setq-default tab-width 4)
+(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
+(setq-default indent-tabs-mode nil)
+
+(setq default-directory "~/")
+(setq column-number-mode t)
+
