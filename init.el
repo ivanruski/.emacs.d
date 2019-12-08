@@ -2,7 +2,7 @@
 ;; no sure what exacly the function
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/*"))
+             '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 ;; use separete file for customize
