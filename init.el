@@ -12,8 +12,11 @@
 ;; Skip the startup screen
 (setq-default inhibit-startup-screen t)
 
+;; Turn off the awful beep in Windows
+(setq visible-bell 1)
+
 ;;Load default theme
-(load-theme 'zenburn t)
+(load-theme 'ample-zen t)
 
 ;; Hide the toolbar
 (tool-bar-mode -1)
@@ -56,3 +59,10 @@
 
 (setq default-directory "~/")
 (setq column-number-mode t)
+
+
+;;;; Org mode Configuration
+;; Enable org mode
+(require 'org)
+;; Enter org mode when encounter file ending in .org
+

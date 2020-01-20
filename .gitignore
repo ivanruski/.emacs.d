@@ -1,3 +1,5 @@
 /url/cache
 auto-save-list/
 session*
+backup/*
+transient/*
