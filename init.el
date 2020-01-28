@@ -16,7 +16,7 @@
 (setq visible-bell 1)
 
 ;;Load default theme
-(load-theme 'ample-zen t)
+(load-theme 'zenburn t)
 
 ;; Hide the toolbar
 (tool-bar-mode -1)
@@ -66,3 +66,6 @@
 (require 'org)
 ;; Enter org mode when encounter file ending in .org
 
+;;;; Multiple cursors
+;; 
+(require 'multiple-cursors)
