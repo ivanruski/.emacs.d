@@ -64,7 +64,15 @@
 ;;;; Org mode Configuration
 ;; Enable org mode
 (require 'org)
-;; Enter org mode when encounter file ending in .org
+;; Change TODO keywords
+(setq org-todo-keywords
+      '((sequence "TODO" "DOING" "|" "DONE")))
+;; Change colors of TODO keywords
+(setq org-todo-keyword-faces
+      '(("TODO" . "#F0DFAF")
+        ("DOING" . "#AFB3F0")))
+
+;;;; End org mode configuration
 
 ;;;; Multiple cursors
 ;; 
