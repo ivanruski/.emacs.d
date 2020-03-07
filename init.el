@@ -77,3 +77,11 @@
 ;;;; Multiple cursors
 ;; 
 (require 'multiple-cursors)
+
+;;;; projectile configuration
+(require 'projectile)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode +1)
+;; this aint gonna work in another pc for now
+(setq projectile-project-search-path '("c:/projects/"))
