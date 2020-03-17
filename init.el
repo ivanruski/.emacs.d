@@ -38,6 +38,8 @@
 (global-set-key [(control z)] 'undo)
 ;; Change M-x to C-x C-m
 (global-set-key "\C-x\C-m" 'execute-extended-command)
+;; Multiple cursors
+(global-set-key "\C-cl" 'mc/edit-lines)
 
 ;; Overriding the default (control-b) for showing and navigating
 ;; to all available opened buffers
@@ -64,6 +66,8 @@
 ;;;; Org mode Configuration
 ;; Enable org mode
 (require 'org)
+;; Turn on auto-fill-mode when org-starts
+(add-hook 'org-mode-hook 'auto-fill-mode) 
 ;; Change TODO keywords
 (setq org-todo-keywords
       '((sequence "TODO" "DOING" "|" "DONE")))
@@ -84,4 +88,4 @@
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
 ;; this aint gonna work in another pc for now
-(setq projectile-project-search-path '("c:/projects/"))
+(setq projectile-project-search-path '("c:/projects/" "~/Documents/"))
