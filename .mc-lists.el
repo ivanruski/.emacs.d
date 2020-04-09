@@ -3,9 +3,12 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        org-delete-char
+        org-return
         org-self-insert-command
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        org-shiftup
         ))

@@ -6,6 +6,7 @@
  '(custom-safe-themes
    (quote
     ("0c9f63c9d90d0d135935392873cd016cc1767638de92841a5b277481f1ec1f4a" "2a7beed4f24b15f77160118320123d699282cbf196e0089f113245d4b729ba5d" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" default)))
+ '(mc/edit-lines-empty-lines (quote ignore))
  '(package-selected-packages
    (quote
     (projectile multiple-cursors solarized-theme zenburn-theme indium))))

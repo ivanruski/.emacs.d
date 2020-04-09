@@ -38,8 +38,11 @@
 (global-set-key [(control z)] 'undo)
 ;; Change M-x to C-x C-m
 (global-set-key "\C-x\C-m" 'execute-extended-command)
-;; Multiple cursors
+
+;;;; Multiple cursors
+;; 
 (global-set-key "\C-cl" 'mc/edit-lines)
+;;
 
 ;; Overriding the default (control-b) for showing and navigating
 ;; to all available opened buffers
