@@ -1,14 +1,11 @@
-;; add melpa packages
-;; no sure what exacly the function
+;;
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-;; use separete file for customize
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
 
+;;;; UI changes
 ;; Skip the startup screen
 (setq-default inhibit-startup-screen t)
 
@@ -33,41 +30,50 @@
 ;; turn on highlight matching brackets when cursor is on one
 (show-paren-mode 1)
 
-;; Key re-maps
+;; Move through windows using s + arrow keys
+(windmove-default-keybindings)
+
+;; Display current position of the point (row, col)
+(setq column-number-mode t)
+
+;;;;
+;; use separete file for customize
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;;;; Key re-maps
+
 ;; Change hotkey for undo
-(global-set-key [(control z)] 'undo)
+(global-set-key (kbd "C-z") 'undo)
+
 ;; Change M-x to C-x C-m
-(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
-;;;; Multiple cursors
-;; 
-(global-set-key "\C-cl" 'mc/edit-lines)
+;; Make right Alt to be treated the same as left Alt
+(setq w32-recognize-altgr nil)
+
+;; Multiple cursors
+(global-set-key (kbd "C-c l") 'mc/edit-lines)
+
 ;;
-
-;; Overriding the default (control-b) for showing and navigating
-;; to all available opened buffers
-(global-set-key [(control tab)] 'switch-to-buffer)
+(global-set-key (kbd "C-<tab>") 'switch-to-buffer)
 
 ;; Set emacs backup directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
   backup-by-copying t    ; Don't delink hardlinks
   version-control t      ; Use version numbers on backups
   delete-old-versions t  ; Automatically delete excess backups
-  kept-new-versions 5   ; how many of the newest versions to keep
-  kept-old-versions 5    ; and how many of the old
+  kept-new-versions 2   ; how many of the newest versions to keep
+  kept-old-versions 2    ; and how many of the old
   )
 
-;; use spaces instead of tab characters and make the default tab width to 4 chars 
-(setq-default tab-width 4)
-(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
+;; use spaces instead of tab characters
 (setq-default indent-tabs-mode nil)
-
-(setq default-directory "~/")
-(setq column-number-mode t)
-
+;; make the default tab width to 4 chars 
+(setq-default tab-width 4)
 
 ;;;; Org mode Configuration
-;; Enable org mode
+;;
 (require 'org)
 ;; Turn on auto-fill-mode when org-starts
 (add-hook 'org-mode-hook 'auto-fill-mode) 
@@ -79,16 +85,26 @@
       '(("TODO" . "#F0DFAF")
         ("DOING" . "#AFB3F0")))
 
-;;;; End org mode configuration
-
-;;;; Multiple cursors
-;; 
-(require 'multiple-cursors)
-
 ;;;; projectile configuration
 (require 'projectile)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
-;; this aint gonna work in another pc for now
-(setq projectile-project-search-path '("c:/projects/" "~/Documents/"))
+(setq projectile-project-search-path '("~/../../projects/" "~/Documents/"))
+
+;;;; Shell configuration
+;; TODO: Check the OS
+(setq explicit-shell-file-name "C:/Program Files/Git/bin/bash.exe")
+(setq shell-file-name "bash")
+(setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
+(setenv "SHELL" shell-file-name)
+(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+
+;;;; Counsel
+(ivy-mode 1)
+(global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+(global-set-key (kbd "M-y") 'counsel-yank-pop)
+
+;;;; Neotree
+(global-set-key (kbd "<f8>") 'neotree-toggle)
