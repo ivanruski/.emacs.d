@@ -85,6 +85,7 @@
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
 (setq projectile-project-search-path '("~/../../projects/" "~/Documents/"))
+(setq projectile-completion-system 'ivy)
 
 ;;;; Shell configuration
 ;; TODO: Check the OS
@@ -103,3 +104,9 @@
 
 ;;;; Neotree
 (global-set-key (kbd "<f8>") 'neotree-toggle)
+
+
+;; disabled commnads
+(put 'set-goal-column 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
