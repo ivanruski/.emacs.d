@@ -1,9 +1,8 @@
 ;;
 (require 'package)
-(package-initialize)
-
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
 
 ;;;; UI changes
 ;; Skip the startup screen
@@ -42,6 +41,8 @@
 (load custom-file)
 
 ;;;; Key re-maps
+;; Use ibuffer instead of list-all-buffers
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Change hotkey for undo
 (global-set-key (kbd "C-z") 'undo)
@@ -59,13 +60,18 @@
 (global-set-key (kbd "C-<tab>") 'switch-to-buffer)
 
 ;; backup files
-(setq backup-directory-alist
-      `((".*" "~/.emacs.d/backup/" t)))
+(setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup/"))
+      delete-old-versions t)
 
 ;; use spaces instead of tab characters
 (setq-default indent-tabs-mode nil)
 ;; make the default tab width to 4 chars 
 (setq-default tab-width 4)
+
+;;;; Magit configuration
+;;
+(require 'magit)
+(define-key magit-mode-map (kbd "C-c s") 'magit-status)
 
 ;;;; Org mode Configuration
 ;;
@@ -105,6 +111,8 @@
 ;;;; Neotree
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 
+;;;; expand-region
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 ;; disabled commnads
 (put 'set-goal-column 'disabled nil)
