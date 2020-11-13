@@ -25,3 +25,4 @@ backup/*
 transient/*
 .mc-lists.el
 server/
+.cache/

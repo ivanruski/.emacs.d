@@ -1,3 +1,5 @@
+
+
 ;;
 (require 'package)
 (add-to-list 'package-archives
@@ -108,9 +110,6 @@
 (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
 
-;;;; Neotree
-(global-set-key (kbd "<f8>") 'neotree-toggle)
-
 ;;;; expand-region
 (global-set-key (kbd "C-=") 'er/expand-region)
 
@@ -118,3 +117,5 @@
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+
+(require 'go-dlv)
