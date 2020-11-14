@@ -119,3 +119,9 @@
 (put 'downcase-region 'disabled nil)
 
 (require 'go-dlv)
+
+;; sql-ms
+(setq sql-ms-program "sqlcmd"
+      sql-ms-options (quote ("-W" "-s" "|" "-I")))
+
+(define-key sql-mode-map (kbd "C-S-e") 'sql-send-region)
