@@ -1,5 +1,3 @@
-
-
 ;;
 (require 'package)
 (add-to-list 'package-archives
@@ -87,6 +85,7 @@
 (setq org-todo-keyword-faces
       '(("TODO" . "#F0DFAF")
         ("DOING" . "#AFB3F0")))
+(setq org-startup-indented t)
 
 ;;;; projectile configuration
 (require 'projectile)
@@ -94,6 +93,7 @@
 (projectile-mode +1)
 (setq projectile-project-search-path '("~/../../projects/" "~/Documents/"))
 (setq projectile-completion-system 'ivy)
+(setq projectile-indexing-method 'alien)
 
 ;;;; Shell configuration
 ;; TODO: Check the OS
@@ -124,4 +124,4 @@
 (setq sql-ms-program "sqlcmd"
       sql-ms-options (quote ("-W" "-s" "|" "-I")))
 
-(define-key sql-mode-map (kbd "C-S-e") 'sql-send-region)
+;; (define-key sql-mode-map (kbd "C-S-e") 'sql-send-region)
