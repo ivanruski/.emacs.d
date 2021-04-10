@@ -91,21 +91,14 @@
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
-(setq projectile-project-search-path '("~/../../projects/" "~/Documents/"))
+(setq projectile-project-search-path '("~/repos/"))
 (setq projectile-completion-system 'ivy)
 (setq projectile-indexing-method 'alien)
-
-;;;; Shell configuration
-;; TODO: Check the OS
-(setq explicit-shell-file-name "C:/Program Files/Git/bin/bash.exe")
-(setq shell-file-name "bash")
-(setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
-(setenv "SHELL" shell-file-name)
-(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
 
 ;;;; Counsel
 (ivy-mode 1)
 (global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "C-r") 'swiper-backward)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
