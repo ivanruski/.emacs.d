@@ -118,10 +118,22 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
+;;;; golang
+;; start lsp server on opening go file
+(add-hook 'go-mode-hook #'lsp)
+
+;; go debugger
 (require 'go-dlv)
 
-;; sql-ms
-(setq sql-ms-program "sqlcmd"
-      sql-ms-options (quote ("-W" "-s" "|" "-I")))
+;; call fmt and imports on every save
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook 'gofmt-before-save)
 
-;; (define-key sql-mode-map (kbd "C-S-e") 'sql-send-region)
+;; Extend PATH when emacs is started from Launchpad
+(when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
+  (setenv "PATH" (concat "/Users/ivanruski/go/bin:" "/usr/local/bin:" (getenv "PATH")))
+  (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
+
+;;;; direx
+(require 'direx)
+(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
