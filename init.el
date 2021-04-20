@@ -74,8 +74,6 @@
 (define-key magit-mode-map (kbd "C-c s") 'magit-status)
 
 ;;;; Org mode Configuration
-;;
-(require 'org)
 ;; Turn on auto-fill-mode when org-starts
 (add-hook 'org-mode-hook 'auto-fill-mode) 
 ;; Change TODO keywords
@@ -88,9 +86,10 @@
 (setq org-startup-indented t)
 
 ;;;; projectile configuration
-(require 'projectile)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "s-s") 'projectile-find-file)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-switch-project)
 (setq projectile-project-search-path '("~/repos/"))
 (setq projectile-completion-system 'ivy)
 (setq projectile-indexing-method 'alien)
@@ -115,9 +114,6 @@
 ;; start lsp server on opening go file
 (add-hook 'go-mode-hook #'lsp)
 
-;; go debugger
-(require 'go-dlv)
-
 ;; call fmt and imports on every save
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
@@ -128,5 +124,4 @@
   (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
 
 ;;;; direx
-(require 'direx)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
