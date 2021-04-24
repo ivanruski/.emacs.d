@@ -40,7 +40,7 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
-;;;; Key re-maps
+;;;; global-set-key re-maps
 ;; Use ibuffer instead of list-all-buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
@@ -50,14 +50,28 @@
 ;; Change M-x to C-x C-m
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
-;; Make right Alt to be treated the same as left Alt
-(setq w32-recognize-altgr nil)
+;; Move point to the beginning of the buffer
+(global-set-key (kbd "C-c t") 'beginning-of-buffer)
 
-;; Multiple cursors
+;; Move point to the end of the buffer
+(global-set-key (kbd "C-c b") 'end-of-buffer)
+
+ ;; Multiple cursors
 (global-set-key (kbd "C-c l") 'mc/edit-lines)
 
 ;;
 (global-set-key (kbd "C-<tab>") 'switch-to-buffer)
+
+;; direx
+(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
+
+;; expand-region
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+
+
+;; Make right Alt to be treated the same as left Alt
+(setq w32-recognize-altgr nil)
 
 ;; backup files
 (setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup/"))
@@ -69,7 +83,6 @@
 (setq-default tab-width 4)
 
 ;;;; Magit configuration
-;;
 (require 'magit)
 (define-key magit-mode-map (kbd "C-c s") 'magit-status)
 
@@ -96,14 +109,11 @@
 
 ;;;; Counsel
 (ivy-mode 1)
-(global-set-key (kbd "C-s") 'swiper-isearch)
-(global-set-key (kbd "C-r") 'swiper-backward)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-x b") 'ivy-switch-buffer)
-(global-set-key (kbd "M-y") 'counsel-yank-pop)
-
-;;;; expand-region
-(global-set-key (kbd "C-=") 'er/expand-region)
+(define-key ivy-mode-map (kbd "C-s") 'swiper-isearch)
+(define-key ivy-mode-map (kbd "C-r") 'swiper-backward)
+(define-key ivy-mode-map (kbd "C-x C-f") 'counsel-find-file)
+(define-key ivy-mode-map (kbd "C-x b") 'ivy-switch-buffer)
+(define-key ivy-mode-map (kbd "M-y") 'counsel-yank-pop)
 
 ;; disabled commnads
 (put 'set-goal-column 'disabled nil)
@@ -122,6 +132,3 @@
 (when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
   (setenv "PATH" (concat "/Users/ivanruski/go/bin:" "/usr/local/bin:" (getenv "PATH")))
   (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
-
-;;;; direx
-(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
