@@ -132,3 +132,13 @@
 (when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
   (setenv "PATH" (concat "/Users/ivanruski/go/bin:" "/usr/local/bin:" (getenv "PATH")))
   (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
+
+
+;;;; flyspell
+(setq ispell-program-name "aspell" ;; use aspell instead of ispell
+      ispell-extra-args '("--sug-mode=ultra" ;; use the fastest suggestion algorithm
+                          "--camel-case")) ;; consider camelCase words valid
+
+;; enable flyspell for the following modes
+(dolist (hook '(go-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
