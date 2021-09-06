@@ -35,6 +35,13 @@
 ;; Display current position of the point (row, col)
 (setq column-number-mode t)
 
+;; Show lines numbers relatively to the current line
+(global-display-line-numbers-mode)
+(menu-bar--display-line-numbers-mode-relative)
+
+;;
+(global-subword-mode)
+
 ;;;;
 ;; use separete file for customize
 (setq custom-file "~/.emacs.d/custom.el")
@@ -59,7 +66,7 @@
  ;; Multiple cursors
 (global-set-key (kbd "C-c l") 'mc/edit-lines)
 
-;;
+
 (global-set-key (kbd "C-<tab>") 'switch-to-buffer)
 
 ;; direx
@@ -67,8 +74,6 @@
 
 ;; expand-region
 (global-set-key (kbd "C-=") 'er/expand-region)
-
-
 
 ;; Make right Alt to be treated the same as left Alt
 (setq w32-recognize-altgr nil)
