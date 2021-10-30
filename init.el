@@ -1,4 +1,3 @@
-;;
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
@@ -39,7 +38,7 @@
 (global-display-line-numbers-mode)
 (menu-bar--display-line-numbers-mode-relative)
 
-;;
+;; Go to the next captial letter or end of word when using M-f
 (global-subword-mode)
 
 ;;;;
@@ -112,13 +111,11 @@
 (setq projectile-completion-system 'ivy)
 (setq projectile-indexing-method 'alien)
 
-;;;; Counsel
+;;;; ivy
 (ivy-mode 1)
 (define-key ivy-mode-map (kbd "C-s") 'swiper-isearch)
 (define-key ivy-mode-map (kbd "C-r") 'swiper-backward)
 (define-key ivy-mode-map (kbd "C-x C-f") 'counsel-find-file)
-(define-key ivy-mode-map (kbd "C-x b") 'ivy-switch-buffer)
-(define-key ivy-mode-map (kbd "M-y") 'counsel-yank-pop)
 
 ;; disabled commnads
 (put 'set-goal-column 'disabled nil)
@@ -137,13 +134,3 @@
 (when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
   (setenv "PATH" (concat "/Users/ivanruski/go/bin:" "/usr/local/bin:" (getenv "PATH")))
   (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
-
-
-;;;; flyspell
-(setq ispell-program-name "aspell" ;; use aspell instead of ispell
-      ispell-extra-args '("--sug-mode=ultra" ;; use the fastest suggestion algorithm
-                          "--camel-case")) ;; consider camelCase words valid
-
-;; enable flyspell for the following modes
-(dolist (hook '(go-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
