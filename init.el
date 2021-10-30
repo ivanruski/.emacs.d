@@ -47,8 +47,8 @@
 (load custom-file)
 
 ;;;; global-set-key re-maps
-;; Use ibuffer instead of list-all-buffers
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+;; Use bufler instead of list-all-buffers
+(global-set-key (kbd "C-x C-b") 'bufler)
 
 ;; Change hotkey for undo
 (global-set-key (kbd "C-z") 'undo)
