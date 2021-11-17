@@ -126,6 +126,9 @@
 ;; start lsp server on opening go file
 (add-hook 'go-mode-hook #'lsp)
 
+;; gopls doesn't work well out of the box in files with build tags
+(setq lsp-go-build-flags [ "-tags=integration" ])
+
 ;; call fmt and imports on every save
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
