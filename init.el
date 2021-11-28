@@ -102,6 +102,14 @@
         ("DOING" . "#AFB3F0")))
 (setq org-startup-indented t)
 
+;;;; Org roam
+(setq org-roam-directory "/Users/ivanruski/roam-notes")
+(setq org-roam-v2-ack 't)
+(global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
+(global-set-key (kbd "C-c n f") 'org-roam-node-find)
+(global-set-key (kbd "C-c n i") 'org-roam-node-insert)
+(org-roam-db-autosync-mode)
+
 ;;;; projectile configuration
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
