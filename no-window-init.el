@@ -28,6 +28,10 @@
 ;; Display current position of the point (row, col)
 (setq column-number-mode t)
 
+;; Show lines numbers relatively to the current line
+(global-display-line-numbers-mode)
+(menu-bar--display-line-numbers-mode-relative)
+
 ;;;; Key re-maps
 ;; Use ibuffer instead of list-all-buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
