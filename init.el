@@ -103,7 +103,7 @@
 (setq org-startup-indented t)
 
 ;;;; Org roam
-(setq org-roam-directory "/Users/ivanruski/roam-notes")
+(setq org-roam-directory "~/roam-notes")
 (setq org-roam-v2-ack 't)
 (global-set-key (kbd "C-c n l") 'org-roam-buffer-toggle)
 (global-set-key (kbd "C-c n f") 'org-roam-node-find)
@@ -137,11 +137,13 @@
 ;; gopls doesn't work well out of the box in files with build tags
 (setq lsp-go-build-flags [ "-tags=integration" ])
 
-;; call fmt and imports on every save
-(setq gofmt-command "goimports")
-(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'before-save-hook 'lsp-organize-imports)
+(add-hook 'before-save-hook 'lsp-format-buffer)
 
 ;; Extend PATH when emacs is started from Launchpad
 (when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
   (setenv "PATH" (concat "/Users/ivanruski/go/bin:" "/usr/local/bin:" (getenv "PATH")))
   (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
+
+;; Scheme
+(setq scheme-program-name "mit-scheme")
