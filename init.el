@@ -3,6 +3,8 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
 ;;;; UI changes
 ;; Skip the startup screen
 (setq-default inhibit-startup-screen t)
