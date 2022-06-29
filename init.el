@@ -136,6 +136,8 @@
 ;; start lsp server on opening go file
 (add-hook 'go-mode-hook #'lsp)
 
+(setq lsp-lens-enable nil)
+
 ;; gopls doesn't work well out of the box in files with build tags
 (setq lsp-go-build-flags [ "-tags=integration" ])
 
