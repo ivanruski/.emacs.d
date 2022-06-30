@@ -43,6 +43,9 @@
 ;; Go to the next captial letter or end of word when using M-f
 (global-subword-mode)
 
+;; Go to the top/bottom of buffer when no more scrolling is possible
+(setq scroll-error-top-bottom t)
+
 ;;;;
 ;; use separete file for customize
 (setq custom-file "~/.emacs.d/custom.el")
