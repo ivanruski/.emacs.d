@@ -67,8 +67,9 @@
 ;; Move point to the end of the buffer
 (global-set-key (kbd "C-c b") 'end-of-buffer)
 
- ;; Multiple cursors
+;; Multiple cursors
 (global-set-key (kbd "C-c l") 'mc/edit-lines)
+(global-set-key (kbd "C-c C-.") 'mc/mark-next-like-this-symbol)
 
 
 (global-set-key (kbd "C-<tab>") 'switch-to-buffer)
@@ -78,6 +79,13 @@
 
 ;; expand-region
 (global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C--") 'er/contract-region)
+
+;; fill-paragraph
+(global-set-key (kbd "C-c f") 'fill-paragraph)
+
+;; Wrap lines at 80 characters
+(setq-default fill-column 80)
 
 ;; Make right Alt to be treated the same as left Alt
 (setq w32-recognize-altgr nil)
@@ -97,7 +105,8 @@
 
 ;;;; Org mode Configuration
 ;; Turn on auto-fill-mode when org-starts
-(add-hook 'org-mode-hook 'auto-fill-mode) 
+(add-hook 'org-mode-hook 'auto-fill-mode)
+
 ;; Change TODO keywords
 (setq org-todo-keywords
       '((sequence "TODO" "DOING" "|" "DONE")))
