@@ -145,8 +145,15 @@
 (put 'downcase-region 'disabled nil)
 
 ;;;; golang
+(require 'go-mode)
+
+(define-key go-mode-map (kbd "C-c d") 'lsp-find-definition)
+(define-key go-mode-map (kbd "C-c r") 'lsp-find-references)
+(define-key go-mode-map (kbd "C-c C-r") 'lsp-rename)
+
+;;;; lsp
 ;; start lsp server on opening go file
-(add-hook 'go-mode-hook #'lsp)
+(add-hook 'go-mode-hook 'lsp)
 
 (setq lsp-lens-enable nil)
 
