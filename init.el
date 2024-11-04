@@ -105,16 +105,35 @@
 
 ;;;; Org mode Configuration
 ;; Turn on auto-fill-mode when org-starts
+(require 'org)
+
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;; Change TODO keywords
 (setq org-todo-keywords
-      '((sequence "TODO" "DOING" "|" "DONE")))
+      '((sequence "TODO(t!)" "DOING(w!)" "BLOCKED(b!)" "|" "DONE(d!)")))
+
 ;; Change colors of TODO keywords
 (setq org-todo-keyword-faces
       '(("TODO" . "#F0DFAF")
-        ("DOING" . "#AFB3F0")))
+        ("DOING" . "#AFB3F0")
+        ("BLOCKED" . "#DC143C")))
+
+(setq org-log-into-drawer "LOGBOOK")
+
 (setq org-startup-indented t)
+(setq org-hide-emphasis-markers t)
+(setq org-ellipsis " ▾") ;; M-x customize-face Ret org-ellipsis (in case there is _)
+
+(setq org-agenda-files
+      '("~/orgfiles/tasks.org" "~/orgfiles/today.org" "~/Documents/backlog.org"))
+
+;; group files by year and exclude them from here every january
+(setq org-refile-targets
+      '(("~/orgfiles/archive-24.org" :maxlevel . 1)
+        ("~/orgfiles/today.org" :maxlevel . 1)))
+
+(advice-add 'org-refile :after 'org-save-all-org-buffers)
 
 ;;;; Org roam
 (setq org-roam-directory "~/roam-notes")
