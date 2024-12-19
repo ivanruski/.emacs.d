@@ -36,9 +36,13 @@
 ;; Display current position of the point (row, col)
 (setq column-number-mode t)
 
+;; Delete marked area when typing instead of insert
+(delete-selection-mode t)
+
 ;; Show lines numbers relatively to the current line
-(global-display-line-numbers-mode)
-(menu-bar--display-line-numbers-mode-relative)
+;; TODO: fix this
+(setq display-line-numbers-type 'visual)
+(setq display-line-numbers-mode 't)
 
 ;; Go to the next captial letter or end of word when using M-f
 (global-subword-mode)
