@@ -40,7 +40,7 @@
 (delete-selection-mode t)
 
 ;; Show lines numbers relatively to the current line
-;; TODO: fix this
+(global-display-line-numbers-mode)
 (setq display-line-numbers-type 'visual)
 (setq display-line-numbers-mode 't)
 
