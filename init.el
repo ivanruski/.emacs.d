@@ -176,15 +176,15 @@
 
 ;;;; lsp
 ;; start lsp server on opening go file
-(add-hook 'go-mode-hook 'lsp)
+(require 'lsp-mode)
+(add-hook 'go-mode-hook #'lsp-deferred)
+(add-hook 'before-save-hook 'lsp-organize-imports)
+(add-hook 'before-save-hook 'lsp-format-buffer)
 
 (setq lsp-lens-enable nil)
 
 ;; gopls doesn't work well out of the box in files with build tags
 (setq lsp-go-build-flags [ "-tags=integration" ])
-
-(add-hook 'before-save-hook 'lsp-organize-imports)
-(add-hook 'before-save-hook 'lsp-format-buffer)
 
 ;; Extend PATH when emacs is started from Launchpad
 (when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
