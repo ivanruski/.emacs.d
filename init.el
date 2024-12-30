@@ -59,6 +59,19 @@
 ;; Use ibuffer instead of list-all-buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(setq ibuffer-saved-filter-groups
+      '(("default"
+         ("playg" (filename . "\/playg"))
+         ("orgfiles" (filename . "\/orgfiles"))
+         ("config-service" (filename . "\/bc\/config-service"))
+         ("event-forwarder" (filename . "\/bc\/event-forwarder"))
+         ("uma-config" (filename . "uma-config"))
+         ("vmwcbc" (filename . "vmwcbc")))))
+
+(add-hook 'ibuffer-mode-hook
+	  (lambda ()
+	    (ibuffer-switch-to-saved-filter-groups "default")))
+
 ;; Change hotkey for undo
 (global-set-key (kbd "C-z") 'undo)
 
