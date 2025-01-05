@@ -187,22 +187,43 @@
 (define-key go-mode-map (kbd "C-c r") 'lsp-find-references)
 (define-key go-mode-map (kbd "C-c C-r") 'lsp-rename)
 
-;;;; lsp
 ;; start lsp server on opening go file
-(require 'lsp-mode)
 (add-hook 'go-mode-hook #'lsp-deferred)
-(add-hook 'before-save-hook 'lsp-organize-imports)
-(add-hook 'before-save-hook 'lsp-format-buffer)
-
-(setq lsp-lens-enable nil)
 
 ;; gopls doesn't work well out of the box in files with build tags
 (setq lsp-go-build-flags [ "-tags=integration" ])
 
+;;;; lsp
+(require 'lsp-mode)
+
+(defun before-save-per-mode ()
+  (when (equal major-mode 'go-mode)
+    (lsp-organize-imports)
+    (lsp-format-buffer)))
+
+(add-hook 'before-save-hook 'before-save-per-mode)
+
+(setq lsp-lens-enable nil)
+(setq lsp-enable-snippet nil)
+
+;;;; prettier
+
+;; First install with "npm install -g prettier" and make sure Emacs can find the
+;; "prettier" command
+(require 'prettier-js)
+
+;;;; typescript
+(require 'typescript-mode)
+(add-hook 'typescript-mode-hook #'lsp-deferred)
+(add-hook 'typescript-mode-hook 'prettier-js-mode)
+
+(setq typescript-indent-level 4)
+
+;;;; Scheme
+(setq scheme-program-name "mit-scheme")
+
+;;;; misc
 ;; Extend PATH when emacs is started from Launchpad
 (when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
   (setenv "PATH" (concat "/Users/ivanruski/go/bin:" "/usr/local/bin:" (getenv "PATH")))
   (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
-
-;; Scheme
-(setq scheme-program-name "mit-scheme")
