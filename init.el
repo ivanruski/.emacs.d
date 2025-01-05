@@ -5,6 +5,10 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
+;; https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 ;;;; UI changes
 ;; Skip the startup screen
 (setq-default inhibit-startup-screen t)
@@ -221,9 +225,3 @@
 
 ;;;; Scheme
 (setq scheme-program-name "mit-scheme")
-
-;;;; misc
-;; Extend PATH when emacs is started from Launchpad
-(when (not (cl-search "/Users/ivanruski/go/bin:" (getenv "PATH")))
-  (setenv "PATH" (concat "/Users/ivanruski/go/bin:" "/usr/local/bin:" (getenv "PATH")))
-  (setq exec-path (cons "/Users/ivanruski/go/bin" (cons "/usr/local/bin" exec-path))))
