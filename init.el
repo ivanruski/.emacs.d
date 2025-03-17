@@ -54,6 +54,9 @@
 ;; Go to the top/bottom of buffer when no more scrolling is possible
 (setq scroll-error-top-bottom t)
 
+;; Do not wrap long lines
+(setq-default truncate-lines t)
+
 ;;;;
 ;; use separete file for customize
 (setq custom-file "~/.emacs.d/custom.el")
