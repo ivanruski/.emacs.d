@@ -228,3 +228,7 @@
 
 ;;;; Scheme
 (setq scheme-program-name "mit-scheme")
+
+;;;; Calculate hours worked for a day in today.org
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'hours-worked)
