@@ -52,7 +52,90 @@ HoursWorked property to the total."
         (org-set-property "HoursWorked" (iv/format-duration total-minutes))
         (message "Total: %s" (iv/format-duration total-minutes))))))
 
+(defun iv/parse-duration (dur-str)
+  "Parse a duration string like \"5h15m\", \"4h\", or \"40m\" into total minutes."
+  (let ((hours 0) (mins 0))
+    (when (string-match "\\([0-9]+\\)h" dur-str)
+      (setq hours (string-to-number (match-string 1 dur-str))))
+    (when (string-match "\\([0-9]+\\)m" dur-str)
+      (setq mins (string-to-number (match-string 1 dur-str))))
+    (+ (* hours 60) mins)))
+
+(defun iv/day-heading-p ()
+  "Return non-nil if the heading at point is a day-of-week heading."
+  (let ((text (org-get-heading t t t t)))
+    (string-match-p "^\\(Mon\\|Tue\\|Wed\\|Thu\\|Fri\\|Sat\\|Sun\\)" text)))
+
+(defun iv/weekly-summary ()
+  "Compute average hours worked for the week and insert a Weekly Summary heading.
+Can be invoked from anywhere within a week (level 1 or level 2 heading).
+Only day headings (Mon-Sun) with a HoursWorked property are counted."
+  (interactive)
+  (save-excursion
+    (org-back-to-heading t)
+    (when (> (org-current-level) 1)
+      (outline-up-heading (- (org-current-level) 1)))
+    (unless (= 1 (org-current-level))
+      (user-error "Could not find a week heading (level 1)"))
+    (let ((week-begin (point))
+          (week-end (save-excursion (org-end-of-subtree t t) (point)))
+          (total-minutes 0)
+          (day-count 0)
+          (last-day-end nil))
+      (org-goto-first-child)
+      (let ((done nil))
+        (while (not done)
+          (when (and (= 2 (org-current-level)) (iv/day-heading-p))
+            (let ((hours (org-entry-get (point) "HoursWorked")))
+              (when hours
+                (setq total-minutes (+ total-minutes (iv/parse-duration hours)))
+                (setq day-count (1+ day-count))))
+            (setq last-day-end (save-excursion (org-end-of-subtree t t) (point))))
+          (unless (org-get-next-sibling)
+            (setq done t))))
+      (if (= day-count 0)
+          (message "No days with HoursWorked found in this week.")
+        (let ((avg-minutes (/ total-minutes day-count)))
+          (goto-char last-day-end)
+          (unless (bolp) (insert "\n"))
+          (org-insert-heading)
+          (insert "Summary")
+          (org-set-property "AvgHoursWorked" (iv/format-duration avg-minutes))
+          (message "Average: %s over %d days" (iv/format-duration avg-minutes) day-count))))))
+
+(defvar iv/llm-prompt "Summarize into bullet points what I did this week:\n\n"
+  "Prompt prepended to the week's text when copying for an LLM.")
+
+(defun iv/copy-week-for-llm ()
+  "Copy all day (Mon-Fri) text from the current week with an LLM prompt.
+Prepends `iv/llm-prompt' and copies the result to the kill ring."
+  (interactive)
+  (save-excursion
+    (org-back-to-heading t)
+    (when (> (org-current-level) 1)
+      (outline-up-heading (- (org-current-level) 1)))
+    (unless (= 1 (org-current-level))
+      (user-error "Could not find a week heading (level 1)"))
+    (let ((texts '()))
+      (org-goto-first-child)
+      (let ((done nil))
+        (while (not done)
+          (when (and (= 2 (org-current-level)) (iv/day-heading-p))
+            (let ((beg (point))
+                  (end (save-excursion (org-end-of-subtree t t) (point))))
+              (push (buffer-substring-no-properties beg end) texts)))
+          (unless (org-get-next-sibling)
+            (setq done t))))
+      (if (null texts)
+          (message "No day headings found in this week.")
+        (let ((result (concat iv/llm-prompt
+                              (mapconcat #'identity (nreverse texts) "\n"))))
+          (kill-new result)
+          (message "Week text copied to clipboard."))))))
+
 (define-key org-mode-map (kbd "C-c h") 'iv/calculate-hours-worked)
+(define-key org-mode-map (kbd "C-c w") 'iv/weekly-summary)
+(define-key org-mode-map (kbd "C-c S") 'iv/copy-week-for-llm)
 
 (provide 'hours-worked)
 ;;; hours-worked.el ends here
