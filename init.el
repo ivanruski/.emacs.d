@@ -175,6 +175,8 @@
 (setq projectile-project-search-path '("~/repos/"))
 (setq projectile-completion-system 'ivy)
 (setq projectile-indexing-method 'alien)
+(setq projectile-generic-command nil)
+(setq projectile-track-known-projects-automatically nil)
 
 ;;;; ivy
 (ivy-mode 1)
