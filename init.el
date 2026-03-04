@@ -200,7 +200,7 @@
 (add-hook 'go-mode-hook #'lsp-deferred)
 
 ;; gopls doesn't work well out of the box in files with build tags
-(setq lsp-go-build-flags [ "-tags=integration" ])
+(setq lsp-go-build-flags [ "-tags=integration,poketest" ])
 
 ;;;; lsp
 (require 'lsp-mode)
